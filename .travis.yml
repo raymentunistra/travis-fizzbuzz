@@ -5,12 +5,17 @@ env:
 jobs:
   include:
     - stage: project
+      language: python
+      python:
+        - "2.7"
+        - "3.7"
       before_install:
         - pip install tox mock pytest coverage flake8
-        - pip3.7 install tox mock pytest coverage flake8
+        #- pip3.7 install tox mock pytest coverage flake8
       script:
         - tox
     - stage: docs
+      language: ruby
       before_install:
         - gem install compass zurb-foundation # CSS stylesheets generation
         - gem install prawn -v 2.1.0
