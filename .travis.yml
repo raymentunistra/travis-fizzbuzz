@@ -29,14 +29,13 @@ jobs:
       script:
         - asciidoctor README.adoc -o public/index.html
         - asciidoctor-pdf README.adoc -o public/index.pdf
-
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  committer-from-gh: true
-  local-dir: gh-pages
-  on:
-    branch: master
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        committer-from-gh: true
+        local-dir: gh-pages
+        on:
+          branch: master
 
