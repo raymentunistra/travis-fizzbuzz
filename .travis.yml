@@ -1,0 +1,32 @@
+sudo: required
+
+env:
+
+jobs:
+  include:
+    - stage: project
+      before_install:
+        - pip install tox mock pytest coverage flake8
+        - pip3 install tox mock pytest coverage flake8
+      script:
+        - tox
+    - stage: docs
+      before_install:
+        - gem install compass zurb-foundation # CSS stylesheets generation
+        - gem install prawn -v 2.1.0
+        - gem install asciidoctor # HTML generation
+        - gem install asciidoctor-pdf # PDF generation
+      script:
+        - asciidoctor README.adoc -o public/index.html
+        - asciidoctor-pdf README.adoc -o public/index.pdf
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  committer-from-gh: true
+  local-dir: gh-pages
+  on:
+    branch: master
+
