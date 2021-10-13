@@ -7,7 +7,7 @@ jobs:
     - stage: project
       before_install:
         - pip install tox mock pytest coverage flake8
-        - pip3 install tox mock pytest coverage flake8
+        - pip3.7 install tox mock pytest coverage flake8
       script:
         - tox
     - stage: docs
